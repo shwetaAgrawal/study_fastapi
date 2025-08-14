@@ -34,7 +34,7 @@ python_starter_repo/
   │       ├─ 20-aliases.zsh
   │       └─ 30-python.zsh
   ├─ src/
-  │   └─ example_pkg/
+  │   └─ study_fastapi/
   │       ├─ __init__.py
   │       ├─ logging_utils.py
   │       └─ math_utils.py
@@ -56,7 +56,7 @@ uv sync
 
 ```bash
 uv run pytest -q
-uv run mypy -p example_pkg
+uv run mypy -p study_fastapi
 uv run ruff check .
 uv run ruff format .
 uv run nbqa ruff .
@@ -126,11 +126,11 @@ Quick smoke run and a tiny logging demo:
 
 ```bash
 uv run pytest -q
-uv run mypy -p example_pkg
+uv run mypy -p study_fastapi
 uv run ruff check .
 
 # Logging demo (JSON format, DEBUG level)
-LOG_FORMAT=json LOG_LEVEL=DEBUG uv run python -c 'from example_pkg.logging_utils import get_logger; get_logger(__name__).debug("hello", extra={"user":"alice"})'
+LOG_FORMAT=json LOG_LEVEL=DEBUG uv run python -c 'from study_fastapi.logging_utils import get_logger; get_logger(__name__).debug("hello", extra={"user":"alice"})'
 ```
 
 Tip: in VS Code, start "watch:all" to keep tests, lint, and types running on every file save.
@@ -151,7 +151,7 @@ Open the command palette → "Tasks: Run Task" and pick from:
 - run:pytest-parallel — run tests in parallel using pytest-xdist (-n auto)
 - watch:pytest — run tests when files change
 - watch:pytest-parallel — same as above but parallel
-- run:mypy — type check (-p example_pkg)
+- run:mypy — type check (-p study_fastapi)
 - watch:mypy — type check on changes
 - run:ruff-format — format Python files
 - run:ruff-check-fix — lint and auto-fix Python files
@@ -171,7 +171,7 @@ Open the command palette → "Tasks: Run Task" and pick from:
 - run:pre-commit-install — install git hooks
 - run:ipykernel-install — register the venv as a Jupyter kernel
 - release:tag — prompt for a version and create a git tag via script
-- rename:package — rename `example_pkg` everywhere
+- rename:package — rename `study_fastapi` everywhere
 - verify — sequential: ruff format → ruff check --fix → nbqa ruff --fix → mypy → pytest
 - clean:ruff — remove Ruff caches
 - clean:pytest — remove pytest cache and coverage file
@@ -190,7 +190,7 @@ Docstrings
 
 This repository includes a minimal workflow at `.github/workflows/ci.yml` which runs on pushes and PRs:
 - Lint: `uv run ruff check .`
-- Type check: `uv run mypy -p example_pkg`
+- Type check: `uv run mypy -p study_fastapi`
 - Tests: `uv run pytest -q`
 
 It installs dependencies via `uv sync --dev` and caches uv and the virtualenv for faster runs.
@@ -218,7 +218,7 @@ uv run pre-commit run --all-files
 Notes:
 - Ruff runs with `--fix` by default in the hook. Use with care on large diffs.
 - Black is optional and commented out; uncomment in `.pre-commit-config.yaml` if you prefer it.
-- The mypy hook uses `-p example_pkg`. If you rename the package, update this argument accordingly.
+- The mypy hook uses `-p study_fastapi`. If you rename the package, update this argument accordingly.
 
 ## Jupyter notebooks with the venv interpreter
 
@@ -251,7 +251,7 @@ Notes:
 
 ## Scripts
 
-- `scripts/rename_package.py` — Renames `src/example_pkg` to your package name and updates imports across `src/`, `tests/`, and common configs. Use via the task "rename:package" or:
+- `scripts/rename_package.py` — Renames `src/study_fastapi` to your package name and updates imports across `src/`, `tests/`, and common configs. Use via the task "rename:package" or:
 
 ```bash
 uv run python scripts/rename_package.py my_project
@@ -280,12 +280,12 @@ done
 ```
 
 ## Rename the package
-This template uses `example_pkg`. To rename it automatically, use the built-in task:
+This template uses `study_fastapi`. To rename it automatically, use the built-in task:
 
 - Run VS Code task: "rename:package" and enter your new package name, e.g. `my_project`.
 
 What it does:
-- Renames `src/example_pkg` → `src/<your_pkg>`
+- Renames `src/study_fastapi` → `src/<your_pkg>`
 - Updates imports in `src/` and `tests/`
 - Updates `mypy` targets in `.vscode/tasks.json`, `.pre-commit-config.yaml`, and CI workflow
 - Updates mentions in `README.md`
@@ -321,7 +321,7 @@ Quick usage
 In code:
 
 ```
-from example_pkg.logging_utils import get_logger
+from study_fastapi.logging_utils import get_logger
 
 log = get_logger(__name__)
 log.info("hello")
@@ -330,8 +330,8 @@ log.info("hello")
 Pick format and level via env:
 macOS/zsh examples:
 ```bash
-LOG_FORMAT=json LOG_LEVEL=DEBUG uv run python -c 'from example_pkg.logging_utils import get_logger; get_logger(__name__).debug("debug msg", extra={"user":"alice"})'
-LOG_FORMAT=plain LOG_COLOR=1 uv run python -c 'from example_pkg.logging_utils import get_logger; get_logger().warning("color warning")'
+LOG_FORMAT=json LOG_LEVEL=DEBUG uv run python -c 'from study_fastapi.logging_utils import get_logger; get_logger(__name__).debug("debug msg", extra={"user":"alice"})'
+LOG_FORMAT=plain LOG_COLOR=1 uv run python -c 'from study_fastapi.logging_utils import get_logger; get_logger().warning("color warning")'
 ```
 
 ## Notes

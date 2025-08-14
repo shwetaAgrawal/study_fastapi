@@ -4,7 +4,7 @@ import json
 import logging
 import sys
 
-from example_pkg.logging_utils import get_logger
+from study_fastapi.logging_utils import get_logger
 
 
 def test_get_logger_plain(tmp_path, monkeypatch):

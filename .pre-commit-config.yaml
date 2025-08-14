@@ -17,16 +17,17 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies: []
-        args: ["-p", "example_pkg"]
+        pass_filenames: false
+        args: ["src"]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
+      - id: check-json
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: check-merge-conflict
       - id: check-yaml
-      - id: check-json
 
   # Optional: enable codespell to catch typos in code/docs
   # - repo: https://github.com/codespell-project/codespell

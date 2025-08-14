@@ -40,7 +40,7 @@ jobs:
         run: uv run ruff check .
 
       - name: Type check (mypy)
-        run: uv run mypy -p example_pkg
+        run: uv run mypy -p study_fastapi
 
       - name: Test (pytest)
         run: uv run pytest -q

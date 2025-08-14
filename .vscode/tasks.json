@@ -85,7 +85,7 @@
 				"command",
 				"--filter",
 				"python",
-				"uv run mypy -p example_pkg",
+				"uv run mypy -p src",
 				"src",
 				"tests"
 			],
@@ -161,7 +161,7 @@
 				"run",
 				"mypy",
 				"-p",
-				"example_pkg"
+				"src"
 			],
 			"problemMatcher": []
 		},
@@ -437,7 +437,7 @@
 		{
 			"id": "newPackageName",
 			"type": "promptString",
-			"description": "New package name to replace 'example_pkg' (e.g., my_project)",
+			"description": "New package name to replace 'study_fastapi' (e.g., my_project)",
 			"default": "my_project"
 		}
 	]
