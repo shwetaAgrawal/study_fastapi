@@ -1,0 +1,444 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "watch:pytest",
+			"type": "shell",
+			"command": "uvx",
+			"args": [
+				"--from",
+				"watchfiles",
+				"watchfiles",
+				"--target-type",
+				"command",
+				"--filter",
+				"python",
+				"uv run pytest -q",
+				"src",
+				"tests"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:ipykernel-install",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"python",
+				"-m",
+				"ipykernel",
+				"install",
+				"--user",
+				"--name",
+				"${workspaceFolderBasename}-venv",
+				"--display-name",
+				"Python (${workspaceFolderBasename} .venv)"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "watch:ruff-format",
+			"type": "shell",
+			"command": "uvx",
+			"args": [
+				"--from",
+				"watchfiles",
+				"watchfiles",
+				"--target-type",
+				"command",
+				"--filter",
+				"python",
+				"uv run ruff format .",
+				"src",
+				"tests"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "watch:ruff-check-fix",
+			"type": "shell",
+			"command": "uvx",
+			"args": [
+				"--from",
+				"watchfiles",
+				"watchfiles",
+				"--target-type",
+				"command",
+				"--filter",
+				"python",
+				"uv run ruff check --fix .",
+				"src",
+				"tests"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "watch:mypy",
+			"type": "shell",
+			"command": "uvx",
+			"args": [
+				"--from",
+				"watchfiles",
+				"watchfiles",
+				"--target-type",
+				"command",
+				"--filter",
+				"python",
+				"uv run mypy -p example_pkg",
+				"src",
+				"tests"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "clean:ruff",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"ruff",
+				"clean"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "clean:pytest",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"rm -rf .pytest_cache .coverage"
+			]
+		},
+		{
+			"label": "clean:uv",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"cache",
+				"prune"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "clean:mypy",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"rm -rf .mypy_cache"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "clean:all",
+			"dependsOn": [
+				"clean:ruff",
+				"clean:pytest",
+				"clean:mypy",
+				"clean:uv"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "run:pytest",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"pytest",
+				"-q"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:mypy",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"mypy",
+				"-p",
+				"example_pkg"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:ruff-format",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"ruff",
+				"format",
+				"."
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:ruff-check-fix",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"ruff",
+				"check",
+				"--fix",
+				"."
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:nbqa-ruff-check",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"nbqa",
+				"ruff",
+				"."
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:nbqa-ruff-fix",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"nbqa",
+				"ruff",
+				"--fix",
+				"."
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:nbmake",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"pytest",
+				"--nbmake"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:pytest-htmlcov",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"pytest",
+				"-q",
+				"--cov",
+				"--cov-report=html"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "open:coverage",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"open htmlcov/index.html"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:pip-audit",
+			"type": "shell",
+			"command": "uvx",
+			"args": [
+				"pip-audit"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:bandit",
+			"type": "shell",
+			"command": "uvx",
+			"args": [
+				"bandit",
+				"-q",
+				"-r",
+				"src"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:pre-commit-all",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"pre-commit",
+				"run",
+				"--all-files"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "watch:pytest-parallel",
+			"type": "shell",
+			"command": "uvx",
+			"args": [
+				"--from",
+				"watchfiles",
+				"watchfiles",
+				"--target-type",
+				"command",
+				"--filter",
+				"python",
+				"uv run pytest -q -n auto",
+				"src",
+				"tests"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:pytest-parallel",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"pytest",
+				"-q",
+				"-n",
+				"auto"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "watch:all",
+			"dependsOn": [
+				"watch:pytest",
+				"watch:ruff-format",
+				"watch:ruff-check-fix",
+				"watch:mypy"
+			],
+			"dependsOrder": "parallel",
+			"problemMatcher": []
+		},
+		{
+			"label": "kill:watchers",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-c",
+				"set -o noglob; pkill -f \"uvx --from watchfiles watchfiles\" || true; pkill -f \"ptw -q\" || true"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "verify",
+			"dependsOn": [
+				"run:ruff-format",
+				"run:ruff-check-fix",
+				"run:nbqa-ruff-fix",
+				"run:mypy",
+				"run:pytest"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "run:uv-sync",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"sync"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:pre-commit-install",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"pre-commit",
+				"install"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run:ipykernel-install",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"python",
+				"-m",
+				"ipykernel",
+				"install",
+				"--user",
+				"--name",
+				"${workspaceFolderBasename}-venv",
+				"--display-name",
+				"Python (${workspaceFolderBasename} .venv)"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "setup:project",
+			"dependsOn": [
+				"run:uv-sync",
+				"run:pre-commit-install",
+				"run:ipykernel-install"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "run:codespell",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"uv run codespell || echo 'codespell not installed; enable it in pre-commit if desired'"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "release:tag",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"scripts/release_tag.sh ${input:releaseVersion}"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "rename:package",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"run",
+				"python",
+				"scripts/rename_package.py",
+				"${input:newPackageName}"
+			],
+			"problemMatcher": []
+		}
+	],
+	"inputs": [
+		{
+			"id": "releaseVersion",
+			"type": "promptString",
+			"description": "Version tag to create (e.g., v0.1.0)",
+			"default": "v0.1.0"
+		},
+		{
+			"id": "newPackageName",
+			"type": "promptString",
+			"description": "New package name to replace 'example_pkg' (e.g., my_project)",
+			"default": "my_project"
+		}
+	]
+}

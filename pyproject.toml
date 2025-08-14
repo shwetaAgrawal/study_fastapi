@@ -1,0 +1,64 @@
+[project]
+name = "python-starter-repo-template"
+version = "0.1.0"
+description = "Starter Python project with uv, pytest, mypy, ruff, and VS Code tasks"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+license = { file = "LICENSE" }
+
+[dependency-groups]
+dev = [
+  "pytest>=8.4.1",
+  "pytest-cov>=5.0.0",
+  "pytest-xdist>=3.6.1",
+  "mypy>=1.11",
+  "ruff>=0.12.8",
+  "nbqa>=1.9.1",
+  "nbmake>=1.5.0",
+  "pre-commit>=3.7.1",
+  "ipykernel>=6.29.5",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-q --cov --cov-report=term-missing --cov-report=xml --cov-fail-under=90"
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+show_error_codes = true
+explicit_package_bases = true
+mypy_path = ["src"]
+exclude = [
+  '^\.venv/', '^\.pytest_cache/', '^\.ruff_cache/', '^build/', '^dist/',
+]
+
+[tool.ruff]
+line-length = 100
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "D"]
+ignore = [
+  # Keep module/package docstrings optional in a small template
+  "D107", # Missing docstring in __init__
+]
+
+# Apply docstring convention
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+# Don't enforce docstrings in tests
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+
+[tool.nbqa.mutate]
+ruff = true
+
+[tool.nbqa.addopts]
+ruff = []
+
