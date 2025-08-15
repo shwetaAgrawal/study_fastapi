@@ -43,4 +43,4 @@ jobs:
         run: uv run mypy -p study_fastapi
 
       - name: Test (pytest)
-        run: PYTHONPATH=src uv run pytest -q
+        run: PYTHONPATH=src uv run pytest -q --cov=src
