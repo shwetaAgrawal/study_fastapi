@@ -334,6 +334,40 @@ LOG_FORMAT=json LOG_LEVEL=DEBUG uv run python -c 'from study_fastapi.logging_uti
 LOG_FORMAT=plain LOG_COLOR=1 uv run python -c 'from study_fastapi.logging_utils import get_logger; get_logger().warning("color warning")'
 ```
 
+## VSCODE settings
+Prefer formatting on save and apply Ruff fixes via code actions
+``` json
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.ruff": "explicit"
+  },
+```
+
+This is to load the environment variables from .env file
+``` json
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.terminal.useEnvFile": true,
+```
+
+This is used by Pylance for intellisense and type checking
+``` json
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/src"
+  ],
+```
+
+Following settings are for terminal environment
+``` json
+  "terminal.integrated.env.osx": {
+    "PATH": "${workspaceFolder}/.venv/bin:${env:PATH}",
+    "VIRTUAL_ENV": "${workspaceFolder}/.venv",
+    // This is to load the environment variables from .env file
+    "PYTHONPATH": "${workspaceFolder}/src"
+  },
+```
+Feel free to update these settings as per your requirement.
+
 ## Notes
 - The `tests/conftest.py` ensures `src/` is importable when running pytest from repo root.
 - nbQA tasks will do nothing if you don’t have any `.ipynb` files yet; they’ll kick in once notebooks exist.
