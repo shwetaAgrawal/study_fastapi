@@ -1,6 +1,6 @@
 """hello world for FastAPI."""
 
-from fastapi import FastAPI
+from fastapi import Body, FastAPI, Header
 
 # app is the top-level FastAPI object that represents the whole web application.
 app = FastAPI()
@@ -24,6 +24,8 @@ def greet_static() -> str:
     """Return a static greeting. URL to check - http://127.0.0.1:8000/hi .
 
     Any query parameter passed with this URL will be ignored.
+    Even though get_greeting_message returns a string, FastAPI wraps it in the json
+    and we need to decode it
 
     @returns str: A friendly greeting.
     """
@@ -49,6 +51,35 @@ def greet_personalized_query(name: str) -> str:
 
     If name is null, it will by default return "Hello, World!". Ex - http://127.0.0.1:8000/hello?name=
     If name query parameter is not provided, it will return a 422 error. Ex - http://127.0.0.1:8000/hello
+
+    @params name (str): Name of the person to greet.
+    @returns str: A personalized greeting message.
+    """
+    return get_greeting_message(name)
+
+
+@app.post("/hello", description="Get a personalized greeting.")
+def greet_personalized_body(name: str = Body(embed=True)) -> str:
+    """Return a personalized greeting. URL to check - http://127.0.0.1:8000/hello .
+
+    NOTE: same path can be mapped to multiple functions, each handling different request methods.
+    URL remains same however the request method is POST.
+    Body(embed=True) signifies that name key will be present in the request body as JSON.
+    Body is expected to be like {"name": "shweta"}
+
+    @params name (str): Name of the person to greet.
+    @returns str: A personalized greeting message.
+    """
+    return get_greeting_message(name)
+
+
+@app.post("/hello_header", description="Get a personalized greeting.")
+def greet_personalized_header(name: str = Header()) -> str:
+    """Return a personalized greeting. URL to check - http://127.0.0.1:8000/hello_header .
+
+    NOTE: we can't use /hello path again because we already mapped post method to
+    greet_personalized_body
+    Header is expected to be like {"name": "shweta"}
 
     @params name (str): Name of the person to greet.
     @returns str: A personalized greeting message.

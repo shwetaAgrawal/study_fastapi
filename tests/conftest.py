@@ -7,6 +7,7 @@ import time
 from pathlib import Path
 
 import pytest
+from fastapi.testclient import TestClient
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
@@ -53,3 +54,12 @@ def uvicorn_server_factory():
     for proc in procs:
         proc.terminate()
         proc.wait(timeout=5)
+
+
+@pytest.fixture(scope="module")
+def app_client_factory():
+    def _app_client(app_instance):
+        with TestClient(app_instance) as c:
+            return c
+
+    return _app_client

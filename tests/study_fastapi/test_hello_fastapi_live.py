@@ -62,3 +62,49 @@ def test_hello_error(httpx_client):
             }
         ]
     }
+
+
+def test_hello_post_success(httpx_client):
+    """Test the /hello endpoint with POST method."""
+    response = httpx_client.post("/hello", json={"name": "shweta"})
+    assert response.status_code == 200
+    assert response.json() == "Hello, shweta!"
+
+
+def test_hello_post_error(httpx_client):
+    """Test the /hello endpoint with POST method."""
+    response = httpx_client.post("/hello", json={})
+    assert response.status_code == 422
+    assert response.json() == {
+        "detail": [
+            {
+                "loc": ["body", "name"],
+                "msg": "Field required",
+                "type": "missing",
+                "input": None,
+            }
+        ]
+    }
+
+
+def test_hello_post_header_success(httpx_client):
+    """Test the /hello endpoint with POST method."""
+    response = httpx_client.post("/hello_header", headers={"name": "shweta"})
+    assert response.status_code == 200
+    assert response.json() == "Hello, shweta!"
+
+
+def test_hello_post_header_error(httpx_client):
+    """Test the /hello endpoint with POST method."""
+    response = httpx_client.post("/hello_header", headers={})
+    assert response.status_code == 422
+    assert response.json() == {
+        "detail": [
+            {
+                "loc": ["header", "name"],
+                "msg": "Field required",
+                "type": "missing",
+                "input": None,
+            }
+        ]
+    }
