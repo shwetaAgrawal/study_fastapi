@@ -35,8 +35,14 @@ REPLACEMENTS = [
     # YAML/JSON/TOML and text files where package is referenced
     (".github/workflows/ci.yml", False, ["-p example_pkg"]),
     (".pre-commit-config.yaml", False, ['args: ["-p", "example_pkg"]']),
-    (".vscode/tasks.json", False, ["mypy", "-p", "example_pkg"]),
     ("README.md", False, ["example_pkg"]),
+    (
+        ".vscode/launch.json",
+        False,
+        [
+            "example_pkg.${fileBasenameNoExtension}:app",
+        ],
+    ),
 ]
 
 CODE_GLOBS = [
@@ -133,7 +139,7 @@ def main() -> None:
     print("Next steps:")
     print("- Update project metadata in pyproject.toml if desired.")
     print("- Run tasks: 'setup:project' then 'verify' in VS Code, or:")
-    print("  uv sync && uv run pre-commit install && uv run mypy -p", new_pkg)
+    print("  uv sync && uv run pre-commit install")
 
 
 if __name__ == "__main__":

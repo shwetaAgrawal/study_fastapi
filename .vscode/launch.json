@@ -23,15 +23,12 @@
       "python": "${workspaceFolder}/.venv/bin/python"
     },
     {
-      "name": "FastAPI: Uvicorn (hello_fastapi:app)",
-      "type": "python",
+      "name": "FastAPI: Uvicorn (current file)",
+      "type": "debugpy",
       "request": "launch",
       "module": "uvicorn",
       "args": [
-        "${command:python.interpreterPath}",
-        "-c",
-        "import os,sys; sys.path.insert(0, '${workspaceFolder}/src'); print(os.path.relpath('${file}', '${workspaceFolder}/src').replace('.py','').replace('/', '.').replace('\\\\', '.'))",
-        ":app",
+        "study_fastapi.${fileBasenameNoExtension}:app",
         "--reload",
         "--host",
         "127.0.0.1",

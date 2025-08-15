@@ -1,3 +1,1 @@
-"""Example package for the Python basic template."""
-
-__all__ = ["add"]
+"""Initialize study_fastapi package."""

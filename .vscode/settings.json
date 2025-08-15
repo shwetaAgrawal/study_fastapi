@@ -3,15 +3,19 @@
   "python.terminal.activateEnvironment": true,
   "python.analysis.autoImportCompletions": true,
   "python.analysis.typeCheckingMode": "basic",
-  "jupyter.jupyterServerType": "local",
-  // Prefer formatting on save and apply Ruff fixes via code actions
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.ruff": "explicit"
   },
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.terminal.useEnvFile": true,
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/src"
+  ],
   "terminal.integrated.env.osx": {
     "PATH": "${workspaceFolder}/.venv/bin:${env:PATH}",
-    "VIRTUAL_ENV": "${workspaceFolder}/.venv"
-  },
+    "VIRTUAL_ENV": "${workspaceFolder}/.venv",
+    "PYTHONPATH": "${workspaceFolder}/src"
+  }
 }
