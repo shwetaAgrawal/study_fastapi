@@ -20,6 +20,24 @@ def get_user_agent(user_agent: str = Header()):
     return user_agent
 
 
+@app.get("/hi", description="Method to test where does it search for parameters")
+def greet(name: str) -> str:
+    """Return a friendly greeting. URL = http://127.0.0.1:8002/hi .
+
+    @returns: A friendly greeting message.
+    """
+    return f"Hello, {name}!"
+
+
+@app.post("/hi_post", description="Method to test where does it search for parameters")
+def greet_post(name: str) -> str:
+    """Return a friendly greeting. URL = http://127.0.0.1:8002/hi .
+
+    @returns: A friendly greeting message.
+    """
+    return f"Hello, {name}!"
+
+
 if __name__ == "__main__":
     # Demo of invoking uvicorn internally from python programs
     import uvicorn
