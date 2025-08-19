@@ -20,5 +20,10 @@ def get_json_dumps(obj):
 
     This doesn't support all datatypes though. So FastAPI created a middle layer
     which converts python object to any json encodeable object.
+
+    Basically it supports only objects with either an iterator method implementation
+    or int, str, float, bool
+    list and dict supported as they implement an iterator method
+    Any complex object without a type iterator will return in a Type Error
     """
     return json.dumps(obj)

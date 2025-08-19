@@ -92,4 +92,4 @@ if __name__ == "__main__":
     import uvicorn
 
     # Reload = True implies Uvicorn will restart the web server when code changes are detected.
-    uvicorn.run("study_fastapi.hello_fastapi:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("hello_fastapi:app", host="127.0.0.1", port=8000, reload=True)

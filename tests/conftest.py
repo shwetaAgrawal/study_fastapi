@@ -59,7 +59,6 @@ def uvicorn_server_factory():
 @pytest.fixture(scope="module")
 def app_client_factory():
     def _app_client(app_instance):
-        with TestClient(app_instance) as c:
-            return c
+        return TestClient(app_instance)
 
     return _app_client
