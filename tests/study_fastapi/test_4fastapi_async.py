@@ -3,8 +3,8 @@
 import re
 
 import pytest
+from BaseTestFastAPI import BaseTestFastAPI
 from httpx import ASGITransport, AsyncClient
-from tests.study_fastapi.BaseTestFastAPI import BaseTestFastAPI
 
 from study_fastapi.a4_fastapi_async import app
 
